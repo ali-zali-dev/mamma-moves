@@ -25,8 +25,6 @@ cd backend
 3. Install dependencies:
 ```bash
 npm install
-# or
-yarn install
 ```
 
 4. Create a `.env` file and configure your environment variables:
@@ -36,9 +34,7 @@ cp .env.example .env
 
 5. Start the backend server:
 ```bash
-npm run dev
-# or
-yarn dev
+npm run start:dev
 ```
 
 The backend server should now be running on `http://localhost:YOUR_PORT`

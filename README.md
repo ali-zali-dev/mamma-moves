@@ -48,15 +48,11 @@ cd frontend
 2. Install dependencies:
 ```bash
 npm install
-# or
-yarn install
 ```
 
 3. Start the frontend development server:
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
 The frontend application should now be running on `http://localhost:3000`

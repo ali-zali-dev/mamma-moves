@@ -2,8 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { createReadStream, statSync } from 'fs';
 import { join } from 'path';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, FindOptionsWhere, ILike } from 'typeorm';
 import { Video } from './entities/video.entity';
+import { VideoFiltersDto } from './dto/video-filters.dto';
 
 @Injectable()
 export class VideoService {
@@ -12,8 +13,20 @@ export class VideoService {
     private videoRepository: Repository<Video>,
   ) {}
 
-  async findAll() {
-    return this.videoRepository.find();
+  async findAll(filters?: VideoFiltersDto) {
+    const where: FindOptionsWhere<Video> = {};
+
+    if (filters) {
+      if (filters.search) {
+        where.title = ILike(`%${filters.search}%`);
+        where.description = ILike(`%${filters.search}%`);
+      }
+      if (filters.category) {
+        where.category = filters.category;
+      }
+    }
+
+    return this.videoRepository.find({ where });
   }
 
   async getVideoStream(videoPath: string, range: string) {

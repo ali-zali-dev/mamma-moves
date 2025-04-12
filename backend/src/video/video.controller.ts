@@ -1,13 +1,15 @@
-import { Controller, Get, Headers, Param, Res } from '@nestjs/common';
+import { Controller, Get, Headers, Param, Res, Query } from '@nestjs/common';
 import { Response } from 'express';
 import { VideoService } from './video.service';
 import { Video } from './entities/video.entity';
+import { VideoFiltersDto } from './dto/video-filters.dto';
 import {
   ApiTags,
   ApiOperation,
   ApiResponse,
   ApiParam,
   ApiHeader,
+  ApiQuery,
 } from '@nestjs/swagger';
 
 @ApiTags('video')
@@ -16,14 +18,14 @@ export class VideoController {
   constructor(private readonly videoService: VideoService) {}
 
   @Get()
-  @ApiOperation({ summary: 'Get all videos' })
+  @ApiOperation({ summary: 'Get all videos with optional filters' })
   @ApiResponse({
     status: 200,
-    description: 'Returns all videos',
+    description: 'Returns filtered videos',
     type: [Video],
   })
-  async findAll(): Promise<Video[]> {
-    return this.videoService.findAll();
+  async findAll(@Query() filters?: VideoFiltersDto): Promise<Video[]> {
+    return this.videoService.findAll(filters);
   }
 
   @Get('stream/:filename')

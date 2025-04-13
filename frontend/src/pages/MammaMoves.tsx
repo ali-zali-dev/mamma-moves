@@ -58,15 +58,22 @@ export const MammaMoves = () => {
       </Typography>
       
       {/* Pregnancy Section */}
-      <Box mb={4}>
-        <Typography variant="h5" gutterBottom>
+      <Box mb={4} sx={{ 
+        border: '1px solid #e0e0e0', 
+        borderRadius: 2, 
+        p: 3, 
+        backgroundColor: '#fafafa',
+        maxWidth: '1200px',
+        margin: '0 auto'
+      }}>
+        <Typography variant="h5" gutterBottom sx={{ textAlign: 'left' }}>
           Pregnancy
         </Typography>
-        <Box display="flex" flexWrap="wrap" gap={3}>
+        <Box display="grid" gridTemplateColumns="repeat(3, 1fr)" gap={3}>
           {videos
             .filter((video) => video.category === 'PREGNANCY')
             .map((video) => (
-              <Box key={video.id} flex="1 1 300px" maxWidth="400px">
+              <Box key={video.id}>
                 <Card 
                   sx={{ cursor: 'pointer' }}
                   onClick={() => navigate(`/video/${video.id}`)}
@@ -92,15 +99,22 @@ export const MammaMoves = () => {
       </Box>
 
       {/* Postpartum Section */}
-      <Box mb={4}>
-        <Typography variant="h5" gutterBottom>
+      <Box mb={4} sx={{ 
+        border: '1px solid #e0e0e0', 
+        borderRadius: 2, 
+        p: 3, 
+        backgroundColor: '#fafafa',
+        maxWidth: '1200px',
+        margin: '0 auto'
+      }}>
+        <Typography variant="h5" gutterBottom sx={{ textAlign: 'left' }}>
           Postpartum
         </Typography>
-        <Box display="flex" flexWrap="wrap" gap={3}>
+        <Box display="grid" gridTemplateColumns="repeat(3, 1fr)" gap={3}>
           {videos
             .filter((video) => video.category === 'POSTPARTUM')
             .map((video) => (
-              <Box key={video.id} flex="1 1 300px" maxWidth="400px">
+              <Box key={video.id}>
                 <Card 
                   sx={{ cursor: 'pointer' }}
                   onClick={() => navigate(`/video/${video.id}`)}
@@ -126,15 +140,22 @@ export const MammaMoves = () => {
       </Box>
 
       {/* General Section */}
-      <Box mb={4}>
-        <Typography variant="h5" gutterBottom>
+      <Box mb={4} sx={{ 
+        border: '1px solid #e0e0e0', 
+        borderRadius: 2, 
+        p: 3, 
+        backgroundColor: '#fafafa',
+        maxWidth: '1200px',
+        margin: '0 auto'
+      }}>
+        <Typography variant="h5" gutterBottom sx={{ textAlign: 'left' }}>
           General
         </Typography>
-        <Box display="flex" flexWrap="wrap" gap={3}>
+        <Box display="grid" gridTemplateColumns="repeat(3, 1fr)" gap={3}>
           {videos
             .filter((video) => video.category === 'GENERAL')
             .map((video) => (
-              <Box key={video.id} flex="1 1 300px" maxWidth="400px">
+              <Box key={video.id}>
                 <Card 
                   sx={{ cursor: 'pointer' }}
                   onClick={() => navigate(`/video/${video.id}`)}
@@ -160,15 +181,22 @@ export const MammaMoves = () => {
       </Box>
 
       {/* Specialized Section */}
-      <Box mb={4}>
-        <Typography variant="h5" gutterBottom>
+      <Box mb={4} sx={{ 
+        border: '1px solid #e0e0e0', 
+        borderRadius: 2, 
+        p: 3, 
+        backgroundColor: '#fafafa',
+        maxWidth: '1200px',
+        margin: '0 auto'
+      }}>
+        <Typography variant="h5" gutterBottom sx={{ textAlign: 'left' }}>
           Specialized
         </Typography>
-        <Box display="flex" flexWrap="wrap" gap={3}>
+        <Box display="grid" gridTemplateColumns="repeat(3, 1fr)" gap={3}>
           {videos
             .filter((video) => video.category === 'SPECIALIZED')
             .map((video) => (
-              <Box key={video.id} flex="1 1 300px" maxWidth="400px">
+              <Box key={video.id}>
                 <Card 
                   sx={{ cursor: 'pointer' }}
                   onClick={() => navigate(`/video/${video.id}`)}

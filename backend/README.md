@@ -25,13 +25,51 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) (version specified in .nvmrc)
+- [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
+
 ## Project setup
 
 ```bash
+# Install dependencies
 $ npm install
 ```
 
-## Compile and run the project
+## Docker Compose Setup
+
+The project uses Docker Compose to run PostgreSQL and MinIO services. Make sure you have the following environment variables set in your `.env` file:
+
+```bash
+# Database configuration
+DATABASE_HOST=localhost
+POSTGRES_USER=admin
+POSTGRES_PASSWORD=123456
+POSTGRES_DB=mammamoves
+POSTGRES_PORT=5432
+
+# MinIO configuration
+MINIO_ROOT_USER=minioadmin
+MINIO_ROOT_PASSWORD=minioadmin
+```
+
+To start the services:
+
+```bash
+# Start PostgreSQL and MinIO services
+$ docker-compose up -d
+
+# Stop services
+$ docker-compose down
+```
+
+Services will be available at:
+- PostgreSQL: localhost:5432
+- MinIO API: localhost:9000
+- MinIO Console: localhost:9001
+
+## Running the application
 
 ```bash
 # development

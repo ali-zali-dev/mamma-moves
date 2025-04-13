@@ -7,10 +7,47 @@ A web application for tracking and managing mamma moves (Please add your project
 - Node.js (v14 or higher recommended)
 - npm or yarn
 - Git
+- Docker and Docker Compose (for containerized setup)
 
 ## Installation
 
 ### Backend Setup
+
+#### Option 1: Docker Setup (Recommended)
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/mamma-moves.git
+cd mamma-moves/backend
+```
+
+2. Create a `.env` file and configure your environment variables:
+```bash
+cp .env.example .env
+```
+
+3. Start the services using Docker Compose:
+```bash
+docker-compose up -d
+```
+
+This will start:
+- PostgreSQL database on port 5432
+- MinIO object storage on ports 9000 (API) and 9001 (Console)
+
+You can access:
+- MinIO Console at `http://localhost:9001`
+- MinIO API at `http://localhost:9000`
+
+Default credentials:
+- PostgreSQL: 
+  - User: postgres
+  - Password: postgres
+  - Database: mamma_moves
+- MinIO:
+  - User: minioadmin
+  - Password: minioadmin
+
+#### Option 2: Local Setup
 1. Clone the repository:
 ```bash
 git clone https://github.com/yourusername/mamma-moves.git

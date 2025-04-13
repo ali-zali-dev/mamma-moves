@@ -9,6 +9,11 @@ export enum VideoCategory {
     SPECIALIZED = 'SPECIALIZED',
   }
 
+  export enum VideoAccessLevel {
+    FREE = 'FREE',
+    PREMIUM = 'PREMIUM',
+  }
+
   @Entity()
 export class Video extends BaseEntity {
     @Column()
@@ -32,6 +37,13 @@ export class Video extends BaseEntity {
 
     @Column({ nullable: true })
       thumbnailUrl: string;
+
+      @Column({
+        type: 'enum',
+        enum: VideoAccessLevel,
+        default: VideoAccessLevel.FREE,
+      })
+      accessLevel: VideoAccessLevel;
 }
 export default {
   resource: Video,

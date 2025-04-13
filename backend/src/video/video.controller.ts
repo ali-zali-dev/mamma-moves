@@ -1,37 +1,43 @@
-import {
-  Controller,
-  Get,
-  Headers,
-  Param,
-  Res,
-  StreamableFile,
-} from '@nestjs/common';
+import { Controller, Get, Headers, Param, Res, Query } from '@nestjs/common';
 import { Response } from 'express';
 import { VideoService } from './video.service';
+import { Video } from './entities/video.entity';
+import { VideoFiltersDto } from './dto/video-filters.dto';
+import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 
+@ApiTags('video')
 @Controller('video')
 export class VideoController {
   constructor(private readonly videoService: VideoService) {}
 
-  @Get('stream/:filename')
-  async streamVideo(
-    @Param('filename') filename: string,
-    @Headers('range') range: string,
-    @Res() response: Response,
-  ) {
-    const { file, fileInfo } = await this.videoService.getVideoStream(
-      filename,
-      range,
-    );
-
-    const headers = {
-      'Content-Range': `bytes ${fileInfo.start}-${fileInfo.end}/${fileInfo.size}`,
-      'Accept-Ranges': 'bytes',
-      'Content-Length': fileInfo.chunkSize,
-      'Content-Type': 'video/mp4',
-    };
-
-    response.writeHead(range ? 206 : 200, headers);
-    file.pipe(response);
+  @Get()
+  @ApiOperation({ summary: 'Get all videos with optional filters' })
+  @ApiResponse({
+    status: 200,
+    description: 'Returns filtered videos',
+    type: [Video],
+  })
+  async findAll(@Query() filters?: VideoFiltersDto): Promise<Video[]> {
+    return this.videoService.findAll(filters);
   }
-} 
+
+  @Get(':id')
+  @ApiOperation({ summary: 'Get a video by ID' })
+  @ApiParam({
+    name: 'id',
+    description: 'ID of the video to fetch',
+    type: 'number',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Returns the video if found',
+    type: Video,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Video not found',
+  })
+  async findOne(@Param('id') id: number): Promise<Video> {
+    return this.videoService.findOne(id);
+  }
+}

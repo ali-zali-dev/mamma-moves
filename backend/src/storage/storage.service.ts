@@ -5,6 +5,7 @@ import {
   GetObjectCommand,
   DeleteObjectCommand,
   CreateBucketCommand,
+  PutBucketPolicyCommand,
 } from '@aws-sdk/client-s3';
 import { ConfigService } from '@nestjs/config';
 import { AwsCredentialIdentity } from '@aws-sdk/types';
@@ -67,6 +68,7 @@ export class StorageService {
       Key: key,
       Body: file,
       ContentType: contentType,
+      ACL: 'public-read',
     });
 
     await this.s3Client.send(command);
@@ -109,10 +111,45 @@ export class StorageService {
     try {
       await this.s3Client.send(command);
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        throw new Error(`Failed to create bucket: ${error.message}`);
+      // Ignore error if bucket already exists
+      if (
+        !(error instanceof Error) ||
+        !error.message.includes('already exists')
+      ) {
+        throw error;
       }
-      throw new Error('Failed to create bucket: Unknown error occurred');
+    }
+
+    // Set bucket policy regardless of whether bucket was just created or already existed
+    await this.setBucketPolicy(bucketName);
+  }
+
+  async setBucketPolicy(bucketName: string): Promise<void> {
+    const bucketPolicy = {
+      Version: '2012-10-17',
+      Statement: [
+        {
+          Sid: 'PublicReadGetObject',
+          Effect: 'Allow',
+          Principal: '*',
+          Action: 's3:GetObject',
+          Resource: `arn:aws:s3:::${bucketName}/*`,
+        },
+      ],
+    };
+
+    const putBucketPolicyCommand = new PutBucketPolicyCommand({
+      Bucket: bucketName,
+      Policy: JSON.stringify(bucketPolicy),
+    });
+
+    try {
+      await this.s3Client.send(putBucketPolicyCommand);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw new Error(`Failed to set bucket policy: ${error.message}`);
+      }
+      throw new Error('Failed to set bucket policy: Unknown error occurred');
     }
   }
 }

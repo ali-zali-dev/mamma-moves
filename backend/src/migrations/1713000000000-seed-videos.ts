@@ -52,16 +52,17 @@ export class SeedVideos1713000000000 implements MigrationInterface {
       throw new Error('AWS_S3_BUCKET environment variable is not defined');
     }
 
-    // Create bucket if it doesn't exist
+    // Ensure bucket exists and has correct policy
     try {
       await storageService.createBucket(bucketName);
     } catch (error) {
-      // Ignore error if bucket already exists
-      if (
-        !(error instanceof Error) ||
-        !error.message.includes('already exists')
-      ) {
-        throw error;
+      // If bucket exists, we still want to ensure it has the correct policy
+      if (error instanceof Error && error.message.includes('already exists')) {
+        try {
+          await storageService.setBucketPolicy(bucketName);
+        } catch (policyError) {
+          console.warn('Failed to set bucket policy:', policyError);
+        }
       }
     }
 

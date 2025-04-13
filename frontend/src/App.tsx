@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { SideMenu } from './components/SideMenu';
 import { MammaMoves } from './pages/MammaMoves';
 import { VideoPage } from './pages/VideoPage';
+import { PricingPage } from './pages/PricingPage';
 import './App.css';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
             <Route path="/" element={<h1>Welcome to Mamma Moves</h1>} />
             <Route path="/mamma-moves" element={<MammaMoves />} />
             <Route path="/video/:id" element={<VideoPage />} />
+            <Route path="/pricing" element={<PricingPage />} />
           </Routes>
         </Box>
       </Box>

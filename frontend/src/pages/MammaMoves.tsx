@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, Typography, Card, CardContent, CardMedia, CircularProgress } from '@mui/material';
+import { Box, Typography, Card, CardContent, CardMedia, CircularProgress, Chip } from '@mui/material';
 import axios from 'axios';
 import { config } from '../config';
 
@@ -11,6 +11,8 @@ interface Video {
   thumbnailUrl: string;
   videoUrl: string;
   category: 'PREGNANCY' | 'POSTPARTUM' | 'GENERAL' | 'SPECIALIZED';
+  accessLevel: 'FREE' | 'PREMIUM';
+
 }
 
 export const MammaMoves = () => {
@@ -18,6 +20,14 @@ export const MammaMoves = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+
+  const handleVideoClick = (video: Video) => {
+    if (video.accessLevel !== 'FREE') {
+      navigate('/pricing');
+    } else {
+      navigate(`/video/${video.id}`);
+    }
+  };
 
   useEffect(() => {
     const fetchVideos = async () => {
@@ -64,26 +74,68 @@ export const MammaMoves = () => {
         p: 3, 
         backgroundColor: '#fafafa',
         maxWidth: '1200px',
-        margin: '0 auto'
+        margin: '0 auto',
       }}>
         <Typography variant="h5" gutterBottom sx={{ textAlign: 'left' }}>
           Pregnancy
         </Typography>
-        <Box display="grid" gridTemplateColumns="repeat(3, 1fr)" gap={3}>
+        <Box sx={{ 
+          display: 'flex', 
+          overflowX: 'auto',
+          gap: 3,
+          pb: 2,
+          '&::-webkit-scrollbar': {
+            height: '8px',
+          },
+          '&::-webkit-scrollbar-track': {
+            background: '#f1f1f1',
+            borderRadius: '4px',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            background: '#888',
+            borderRadius: '4px',
+          },
+          '&::-webkit-scrollbar-thumb:hover': {
+            background: '#555',
+          }
+        }}>
           {videos
             .filter((video) => video.category === 'PREGNANCY')
             .map((video) => (
-              <Box key={video.id}>
+              <Box key={video.id} sx={{ minWidth: '300px' }}>
                 <Card 
                   sx={{ cursor: 'pointer' }}
-                  onClick={() => navigate(`/video/${video.id}`)}
+                  onClick={() => handleVideoClick(video)}
                 >
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={video.thumbnailUrl}
-                    alt={video.title}
-                  />
+                  <Box sx={{ position: 'relative' }}>
+                    <CardMedia
+                      component="img"
+                      height="140"
+                      image={video.thumbnailUrl}
+                      alt={video.title}
+                      sx={{
+                        filter: video.accessLevel === 'PREMIUM' ? 'blur(4px)' : 'none',
+                        transition: 'filter 0.3s ease-in-out',
+                        '&:hover': {
+                          filter: video.accessLevel === 'PREMIUM' ? 'blur(2px)' : 'none'
+                        }
+                      }}
+                    />
+                    {video.accessLevel === 'PREMIUM' && (
+                      <Chip
+                        label="PREMIUM"
+                        color="primary"
+                        sx={{
+                          position: 'absolute',
+                          top: 8,
+                          right: 8,
+                          backgroundColor: 'rgba(25, 118, 210, 0.9)',
+                          color: 'white',
+                          fontWeight: 'bold'
+                        }}
+                      />
+                    )}
+                  </Box>
                   <CardContent>
                     <Typography gutterBottom variant="h6" component="div">
                       {video.title}
@@ -98,8 +150,8 @@ export const MammaMoves = () => {
         </Box>
       </Box>
 
-      {/* Postpartum Section */}
-      <Box mb={4} sx={{ 
+{/* Postpartum Section */}
+<Box mb={4} sx={{ 
         border: '1px solid #e0e0e0', 
         borderRadius: 2, 
         p: 3, 
@@ -110,11 +162,30 @@ export const MammaMoves = () => {
         <Typography variant="h5" gutterBottom sx={{ textAlign: 'left' }}>
           Postpartum
         </Typography>
-        <Box display="grid" gridTemplateColumns="repeat(3, 1fr)" gap={3}>
+        <Box sx={{ 
+          display: 'flex', 
+          overflowX: 'auto',
+          gap: 3,
+          pb: 2,
+          '&::-webkit-scrollbar': {
+            height: '8px',
+          },
+          '&::-webkit-scrollbar-track': {
+            background: '#f1f1f1',
+            borderRadius: '4px',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            background: '#888',
+            borderRadius: '4px',
+          },
+          '&::-webkit-scrollbar-thumb:hover': {
+            background: '#555',
+          }
+        }}>
           {videos
             .filter((video) => video.category === 'POSTPARTUM')
             .map((video) => (
-              <Box key={video.id}>
+              <Box key={video.id} sx={{ minWidth: '300px' }}>
                 <Card 
                   sx={{ cursor: 'pointer' }}
                   onClick={() => navigate(`/video/${video.id}`)}
@@ -151,11 +222,30 @@ export const MammaMoves = () => {
         <Typography variant="h5" gutterBottom sx={{ textAlign: 'left' }}>
           General
         </Typography>
-        <Box display="grid" gridTemplateColumns="repeat(3, 1fr)" gap={3}>
+        <Box sx={{ 
+          display: 'flex', 
+          overflowX: 'auto',
+          gap: 3,
+          pb: 2,
+          '&::-webkit-scrollbar': {
+            height: '8px',
+          },
+          '&::-webkit-scrollbar-track': {
+            background: '#f1f1f1',
+            borderRadius: '4px',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            background: '#888',
+            borderRadius: '4px',
+          },
+          '&::-webkit-scrollbar-thumb:hover': {
+            background: '#555',
+          }
+        }}>
           {videos
             .filter((video) => video.category === 'GENERAL')
             .map((video) => (
-              <Box key={video.id}>
+              <Box key={video.id} sx={{ minWidth: '300px' }}>
                 <Card 
                   sx={{ cursor: 'pointer' }}
                   onClick={() => navigate(`/video/${video.id}`)}
@@ -192,11 +282,30 @@ export const MammaMoves = () => {
         <Typography variant="h5" gutterBottom sx={{ textAlign: 'left' }}>
           Specialized
         </Typography>
-        <Box display="grid" gridTemplateColumns="repeat(3, 1fr)" gap={3}>
+        <Box sx={{ 
+          display: 'flex', 
+          overflowX: 'auto',
+          gap: 3,
+          pb: 2,
+          '&::-webkit-scrollbar': {
+            height: '8px',
+          },
+          '&::-webkit-scrollbar-track': {
+            background: '#f1f1f1',
+            borderRadius: '4px',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            background: '#888',
+            borderRadius: '4px',
+          },
+          '&::-webkit-scrollbar-thumb:hover': {
+            background: '#555',
+          }
+        }}>
           {videos
             .filter((video) => video.category === 'SPECIALIZED')
             .map((video) => (
-              <Box key={video.id}>
+              <Box key={video.id} sx={{ minWidth: '300px' }}>
                 <Card 
                   sx={{ cursor: 'pointer' }}
                   onClick={() => navigate(`/video/${video.id}`)}

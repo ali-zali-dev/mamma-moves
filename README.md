@@ -14,6 +14,8 @@ Currently, the project has the following setup completed:
 - Video module implementation
 - Storage module implementation
 - Seed data setup
+- Access level management
+- Admin functionality
 
 ## TODO List
 - [ ] Implement user authentication and authorization

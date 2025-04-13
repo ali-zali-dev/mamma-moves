@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Box, Typography, Grid, Card, CardContent, CardMedia, CircularProgress } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { Box, Typography, Card, CardContent, CardMedia, CircularProgress } from '@mui/material';
 import axios from 'axios';
 import { config } from '../config';
 
@@ -16,6 +17,7 @@ export const MammaMoves = () => {
   const [videos, setVideos] = useState<Video[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchVideos = async () => {
@@ -60,12 +62,15 @@ export const MammaMoves = () => {
         <Typography variant="h5" gutterBottom>
           Pregnancy
         </Typography>
-        <Grid container spacing={3}>
+        <Box display="flex" flexWrap="wrap" gap={3}>
           {videos
             .filter((video) => video.category === 'PREGNANCY')
             .map((video) => (
-              <Grid item xs={12} sm={6} md={4} key={video.id}>
-                <Card>
+              <Box key={video.id} flex="1 1 300px" maxWidth="400px">
+                <Card 
+                  sx={{ cursor: 'pointer' }}
+                  onClick={() => navigate(`/video/${video.id}`)}
+                >
                   <CardMedia
                     component="img"
                     height="140"
@@ -81,9 +86,9 @@ export const MammaMoves = () => {
                     </Typography>
                   </CardContent>
                 </Card>
-              </Grid>
+              </Box>
             ))}
-        </Grid>
+        </Box>
       </Box>
 
       {/* Postpartum Section */}
@@ -91,12 +96,15 @@ export const MammaMoves = () => {
         <Typography variant="h5" gutterBottom>
           Postpartum
         </Typography>
-        <Grid container spacing={3}>
+        <Box display="flex" flexWrap="wrap" gap={3}>
           {videos
             .filter((video) => video.category === 'POSTPARTUM')
             .map((video) => (
-              <Grid item xs={12} sm={6} md={4} key={video.id}>
-                <Card>
+              <Box key={video.id} flex="1 1 300px" maxWidth="400px">
+                <Card 
+                  sx={{ cursor: 'pointer' }}
+                  onClick={() => navigate(`/video/${video.id}`)}
+                >
                   <CardMedia
                     component="img"
                     height="140"
@@ -112,9 +120,9 @@ export const MammaMoves = () => {
                     </Typography>
                   </CardContent>
                 </Card>
-              </Grid>
+              </Box>
             ))}
-        </Grid>
+        </Box>
       </Box>
 
       {/* General Section */}
@@ -122,12 +130,15 @@ export const MammaMoves = () => {
         <Typography variant="h5" gutterBottom>
           General
         </Typography>
-        <Grid container spacing={3}>
+        <Box display="flex" flexWrap="wrap" gap={3}>
           {videos
             .filter((video) => video.category === 'GENERAL')
             .map((video) => (
-              <Grid item xs={12} sm={6} md={4} key={video.id}>
-                <Card>
+              <Box key={video.id} flex="1 1 300px" maxWidth="400px">
+                <Card 
+                  sx={{ cursor: 'pointer' }}
+                  onClick={() => navigate(`/video/${video.id}`)}
+                >
                   <CardMedia
                     component="img"
                     height="140"
@@ -143,9 +154,9 @@ export const MammaMoves = () => {
                     </Typography>
                   </CardContent>
                 </Card>
-              </Grid>
+              </Box>
             ))}
-        </Grid>
+        </Box>
       </Box>
 
       {/* Specialized Section */}
@@ -153,12 +164,15 @@ export const MammaMoves = () => {
         <Typography variant="h5" gutterBottom>
           Specialized
         </Typography>
-        <Grid container spacing={3}>
+        <Box display="flex" flexWrap="wrap" gap={3}>
           {videos
             .filter((video) => video.category === 'SPECIALIZED')
             .map((video) => (
-              <Grid item xs={12} sm={6} md={4} key={video.id}>
-                <Card>
+              <Box key={video.id} flex="1 1 300px" maxWidth="400px">
+                <Card 
+                  sx={{ cursor: 'pointer' }}
+                  onClick={() => navigate(`/video/${video.id}`)}
+                >
                   <CardMedia
                     component="img"
                     height="140"
@@ -174,9 +188,9 @@ export const MammaMoves = () => {
                     </Typography>
                   </CardContent>
                 </Card>
-              </Grid>
+              </Box>
             ))}
-        </Grid>
+        </Box>
       </Box>
     </Box>
   );

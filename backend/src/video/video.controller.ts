@@ -9,7 +9,6 @@ import {
   ApiResponse,
   ApiParam,
   ApiHeader,
-  ApiQuery,
 } from '@nestjs/swagger';
 
 @ApiTags('video')
@@ -26,6 +25,26 @@ export class VideoController {
   })
   async findAll(@Query() filters?: VideoFiltersDto): Promise<Video[]> {
     return this.videoService.findAll(filters);
+  }
+
+  @Get(':id')
+  @ApiOperation({ summary: 'Get a video by ID' })
+  @ApiParam({
+    name: 'id',
+    description: 'ID of the video to fetch',
+    type: 'number',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Returns the video if found',
+    type: Video,
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Video not found',
+  })
+  async findOne(@Param('id') id: number): Promise<Video> {
+    return this.videoService.findOne(id);
   }
 
   @Get('stream/:filename')

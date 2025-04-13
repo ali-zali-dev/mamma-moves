@@ -29,6 +29,10 @@ export class VideoService {
     return this.videoRepository.find({ where });
   }
 
+  async findOne(id: number): Promise<Video> {
+    return this.videoRepository.findOneOrFail({ where: { id } });
+  }
+
   async getVideoStream(videoPath: string, range: string) {
     const videoFilePath = join(process.cwd(), 'videos', videoPath);
     const { size } = statSync(videoFilePath);

@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { VideoModule } from './video/video.module';
+import { StorageModule } from './storage/storage.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { VideoModule } from './video/video.module';
       autoLoadEntities: true,
     }),
     VideoModule,
+    StorageModule,
   ],
   controllers: [],
   providers: [],

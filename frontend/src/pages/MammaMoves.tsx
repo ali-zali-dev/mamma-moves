@@ -9,6 +9,7 @@ interface Video {
   description: string;
   thumbnailUrl: string;
   videoUrl: string;
+  category: 'PREGNANCY' | 'POSTPARTUM' | 'GENERAL' | 'SPECIALIZED';
 }
 
 export const MammaMoves = () => {
@@ -53,28 +54,130 @@ export const MammaMoves = () => {
       <Typography variant="h4" gutterBottom>
         Mamma Moves Videos
       </Typography>
-      <Grid container spacing={3}>
-        {videos.map((video) => (
-          <Grid item xs={12} sm={6} md={4} key={video.id}>
-            <Card>
-              <CardMedia
-                component="img"
-                height="140"
-                image={video.thumbnailUrl}
-                alt={video.title}
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h6" component="div">
-                  {video.title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {video.description}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+      
+      {/* Pregnancy Section */}
+      <Box mb={4}>
+        <Typography variant="h5" gutterBottom>
+          Pregnancy
+        </Typography>
+        <Grid container spacing={3}>
+          {videos
+            .filter((video) => video.category === 'PREGNANCY')
+            .map((video) => (
+              <Grid item xs={12} sm={6} md={4} key={video.id}>
+                <Card>
+                  <CardMedia
+                    component="img"
+                    height="140"
+                    image={video.thumbnailUrl}
+                    alt={video.title}
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h6" component="div">
+                      {video.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {video.description}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+        </Grid>
+      </Box>
+
+      {/* Postpartum Section */}
+      <Box mb={4}>
+        <Typography variant="h5" gutterBottom>
+          Postpartum
+        </Typography>
+        <Grid container spacing={3}>
+          {videos
+            .filter((video) => video.category === 'POSTPARTUM')
+            .map((video) => (
+              <Grid item xs={12} sm={6} md={4} key={video.id}>
+                <Card>
+                  <CardMedia
+                    component="img"
+                    height="140"
+                    image={video.thumbnailUrl}
+                    alt={video.title}
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h6" component="div">
+                      {video.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {video.description}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+        </Grid>
+      </Box>
+
+      {/* General Section */}
+      <Box mb={4}>
+        <Typography variant="h5" gutterBottom>
+          General
+        </Typography>
+        <Grid container spacing={3}>
+          {videos
+            .filter((video) => video.category === 'GENERAL')
+            .map((video) => (
+              <Grid item xs={12} sm={6} md={4} key={video.id}>
+                <Card>
+                  <CardMedia
+                    component="img"
+                    height="140"
+                    image={video.thumbnailUrl}
+                    alt={video.title}
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h6" component="div">
+                      {video.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {video.description}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+        </Grid>
+      </Box>
+
+      {/* Specialized Section */}
+      <Box mb={4}>
+        <Typography variant="h5" gutterBottom>
+          Specialized
+        </Typography>
+        <Grid container spacing={3}>
+          {videos
+            .filter((video) => video.category === 'SPECIALIZED')
+            .map((video) => (
+              <Grid item xs={12} sm={6} md={4} key={video.id}>
+                <Card>
+                  <CardMedia
+                    component="img"
+                    height="140"
+                    image={video.thumbnailUrl}
+                    alt={video.title}
+                  />
+                  <CardContent>
+                    <Typography gutterBottom variant="h6" component="div">
+                      {video.title}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      {video.description}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+        </Grid>
+      </Box>
     </Box>
   );
 }; 

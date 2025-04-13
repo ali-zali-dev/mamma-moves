@@ -19,18 +19,19 @@ import {
   Person as PersonIcon,
   SmartToy as SmartToyIcon,
   Favorite as FavoriteIcon,
+  FitnessCenter,
 } from '@mui/icons-material';
 
 const drawerWidth = 240;
 
 const menuItems = [
   { text: 'Dashboard', icon: <DashboardIcon />, path: '/' },
-  { text: 'Smart Calendar', icon: <CalendarIcon />, path: '/calendar' },
-  { text: 'Qrated', icon: <StarIcon />, path: '/qrated' },
-  { text: 'Expert', icon: <PersonIcon />, path: '/expert' },
+  { text: 'Calendar', icon: <CalendarIcon />, path: '/calendar' },
+  { text: 'Feature 1', icon: <StarIcon />, path: '/feature-1' },
+  { text: 'Feature 2', icon: <PersonIcon />, path: '/feature-2' },
   { text: 'Ask AI', icon: <SmartToyIcon />, path: '/ask-ai' },
   { text: 'Belly-safe', icon: <FavoriteIcon />, path: '/belly-safe' },
-  { text: 'Mamma Moves', icon: <FavoriteIcon />, path: '/mamma-moves' },
+  { text: 'Mamma Moves', icon: <FitnessCenter />, path: '/mamma-moves' },
 ];
 
 export const SideMenu = () => {

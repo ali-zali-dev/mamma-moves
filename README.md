@@ -1,7 +1,27 @@
 # mamma-moves
 
 ## Description
-A web application for tracking and managing mamma moves (Please add your project description here)
+A web application for tracking and managing mamma moves
+
+## Project Status
+Currently, the project has the following setup completed:
+- Basic project structure with frontend and backend separation
+- Docker configuration for development environment
+- Database (PostgreSQL) configuration
+- MinIO object storage setup
+- Development environment configuration
+- Basic npm scripts for development and production
+- Video module implementation
+- Storage module implementation
+- Seed data setup
+
+## TODO List
+- [ ] Implement user authentication and authorization
+- [ ] Add CI/CD pipeline
+- [ ] Implement error handling
+- [ ] Add logging system
+- [ ] Set up monitoring and analytics
+- [ ] Add performance optimizations
 
 ## Prerequisites
 - Node.js (v14 or higher recommended)
@@ -13,23 +33,26 @@ A web application for tracking and managing mamma moves (Please add your project
 
 ### Backend Setup
 
-#### Option 1: Docker Setup (Recommended)
 1. Clone the repository:
 ```bash
 git clone https://github.com/yourusername/mamma-moves.git
 cd mamma-moves/backend
 ```
 
-2. Create a `.env` file and configure your environment variables:
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Create a `.env` file and configure your environment variables:
 ```bash
 cp .env.example .env
 ```
 
-3. Start the services using Docker Compose:
+4. Start the required services using Docker Compose:
 ```bash
 docker-compose up -d
 ```
-
 This will start:
 - PostgreSQL database on port 5432
 - MinIO object storage on ports 9000 (API) and 9001 (Console)
@@ -46,28 +69,6 @@ Default credentials:
 - MinIO:
   - User: minioadmin
   - Password: minioadmin
-
-#### Option 2: Local Setup
-1. Clone the repository:
-```bash
-git clone https://github.com/yourusername/mamma-moves.git
-cd mamma-moves
-```
-
-2. Navigate to the backend directory:
-```bash
-cd backend
-```
-
-3. Install dependencies:
-```bash
-npm install
-```
-
-4. Create a `.env` file and configure your environment variables:
-```bash
-cp .env.example .env
-```
 
 5. Start the backend server:
 ```bash
@@ -87,7 +88,12 @@ cd frontend
 npm install
 ```
 
-3. Start the frontend development server:
+3. Create a `.env` file and configure your environment variables:
+```bash
+cp .env.example .env
+```
+
+4. Start the frontend development server:
 ```bash
 npm run dev
 ```

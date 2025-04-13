@@ -18,10 +18,12 @@
   "dependencies": {
     "@adminjs/express": "^6.1.0",
     "@adminjs/nestjs": "^6.1.0",
+    "@adminjs/typeorm": "^5.0.1",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.1.1",
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
+    "@nestjs/typeorm": "^11.0.0",
     "adminjs": "^7.7.2",
     "express-formidable": "^1.2.0",
     "express-session": "^1.17.3",

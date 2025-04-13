@@ -1,4 +1,6 @@
-import { Column, Entity, BaseEntity } from 'typeorm';
+import { Column, Entity } from 'typeorm';
+
+import { BaseEntity } from './common.js';
 
 export enum VideoCategory {
     PREGNANCY = 'PREGNANCY',

@@ -1,7 +1,9 @@
 # mamma-moves
 
 ## Description
-A web application for tracking and managing mamma moves
+A web application designed to help users track and manage their fitness journey with Mamma Moves. The platform offers a comprehensive library of exercise videos that users can easily search and filter. Additionally, users have the option to unlock premium content through our subscription service, giving them access to exclusive workout videos and features.
+## Links
+- [Video Explanation](https://drive.google.com/file/d/1wY5AZjgZ1e2J8JKA5CnGnBz-ylxdcwXc/view?usp=sharing)
 
 ## Project Status
 Currently, the project has the following setup completed:
@@ -16,6 +18,10 @@ Currently, the project has the following setup completed:
 - Seed data setup
 - Access level management
 - Admin functionality
+![Mamma Moves Screenshot](backend/static/r1.png)
+![Mamma Moves Screenshot](backend/static/r2.png)
+
+
 
 ## TODO List
 - [ ] Implement user authentication and authorization

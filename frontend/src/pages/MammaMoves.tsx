@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Box, Typography, Card, CardContent, CardMedia, CircularProgress, Chip } from '@mui/material';
 import axios from 'axios';
 import { config } from '../config';
+import { useAuth } from '../contexts/AuthContext';
+import { createAuthInterceptor } from '../services/authService';
 
 interface Video {
   id: string;
@@ -20,6 +22,13 @@ export const MammaMoves = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const { token } = useAuth();
+
+  useEffect(() => {
+    if (token) {
+      createAuthInterceptor(token);
+    }
+  }, [token]);
 
   const handleVideoClick = (video: Video) => {
     if (video.accessLevel !== 'FREE') {

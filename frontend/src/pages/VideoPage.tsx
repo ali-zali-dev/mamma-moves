@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Box, Typography, CircularProgress, Button, Alert } from '@mui/material';
 import axios from 'axios';
 import { config } from '../config';
+import { useAuth } from '../contexts/AuthContext';
+import { createAuthInterceptor } from '../services/authService';
 
 interface Video {
   id: string;
@@ -21,6 +23,13 @@ export const VideoPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [videoError, setVideoError] = useState<string | null>(null);
+  const { token } = useAuth();
+
+  useEffect(() => {
+    if (token) {
+      createAuthInterceptor(token);
+    }
+  }, [token]);
 
   useEffect(() => {
     const fetchVideo = async () => {

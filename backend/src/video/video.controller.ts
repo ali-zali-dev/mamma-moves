@@ -1,11 +1,19 @@
-import { Controller, Get, Headers, Param, Res, Query } from '@nestjs/common';
-import { Response } from 'express';
+import { Controller, Get, Param, Query, UseGuards } from '@nestjs/common';
 import { VideoService } from './video.service';
 import { Video } from './entities/video.entity';
 import { VideoFiltersDto } from './dto/video-filters.dto';
-import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiParam,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @ApiTags('video')
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 @Controller('video')
 export class VideoController {
   constructor(private readonly videoService: VideoService) {}
@@ -37,7 +45,7 @@ export class VideoController {
     status: 404,
     description: 'Video not found',
   })
-  async findOne(@Param('id') id: string): Promise<Video> {
+  async findOne(@Param('id') id: number): Promise<Video> {
     return this.videoService.findOne(id);
   }
 }

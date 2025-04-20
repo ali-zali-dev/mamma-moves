@@ -12,8 +12,8 @@ import {
 export abstract class BaseEntity {
   @Expose()
   @ApiProperty()
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Expose()
   @ApiProperty()

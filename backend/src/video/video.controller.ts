@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Query, UseGuards, Req } from '@nestjs/common';
 import { VideoService } from './video.service';
 import { Video } from './entities/video.entity';
 import { VideoFiltersDto } from './dto/video-filters.dto';
@@ -10,6 +10,7 @@ import {
   ApiBearerAuth,
 } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { Request } from 'express';
 
 @ApiTags('video')
 @ApiBearerAuth()
@@ -45,7 +46,12 @@ export class VideoController {
     status: 404,
     description: 'Video not found',
   })
-  async findOne(@Param('id') id: number): Promise<Video> {
-    return this.videoService.findOne(id);
+  @ApiResponse({
+    status: 403,
+    description: 'Premium content requires an active subscription',
+  })
+  async findOne(@Param('id') id: number, @Req() req: Request): Promise<Video> {
+    const userId = req.user?.['id'];
+    return this.videoService.findOne(id, userId);
   }
 }

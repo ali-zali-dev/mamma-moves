@@ -21,3 +21,5 @@ export abstract class BaseEntity extends TypeOrmBaseEntity {
   @DeleteDateColumn({ type: 'timestamptz', nullable: true })
   deletedAt?: Date;
 }
+
+export default BaseEntity;

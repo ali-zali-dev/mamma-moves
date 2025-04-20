@@ -31,11 +31,7 @@ export const MammaMoves = () => {
   }, [token]);
 
   const handleVideoClick = (video: Video) => {
-    if (video.accessLevel !== 'FREE') {
-      navigate('/pricing');
-    } else {
       navigate(`/video/${video.id}`);
-    }
   };
 
   useEffect(() => {

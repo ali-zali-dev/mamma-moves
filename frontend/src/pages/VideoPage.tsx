@@ -39,6 +39,10 @@ export const VideoPage = () => {
         setVideo(response.data);
         setLoading(false);
       } catch (err) {
+        if (axios.isAxiosError(err) && err.response?.status === 403) {
+          navigate('/pricing');
+          return;
+        }
         setError('Failed to fetch video');
         setLoading(false);
         console.error('Error fetching video:', err);
@@ -46,7 +50,7 @@ export const VideoPage = () => {
     };
 
     fetchVideo();
-  }, [id]);
+  }, [id, navigate]);
 
   // Ensure the video URL is properly formatted
   const videoUrl = video?.videoUrl as string

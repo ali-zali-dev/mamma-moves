@@ -1,7 +1,12 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  UnauthorizedException,
+  ConflictException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from '../user/user.service';
 import * as bcrypt from 'bcrypt';
+import { SignUpDto } from './dto/signup.dto';
 
 @Injectable()
 export class AuthService {
@@ -29,5 +34,23 @@ export class AuthService {
     return {
       access_token: this.jwtService.sign(payload),
     };
+  }
+
+  async signUp(signUpDto: SignUpDto) {
+    try {
+      const hashedPassword = await bcrypt.hash(signUpDto.password, 10);
+      const user = await this.userService.create({
+        email: signUpDto.email,
+        password: hashedPassword,
+      });
+
+      const { password, ...result } = user;
+      return result;
+    } catch (error) {
+      if (error.message.includes('duplicate key')) {
+        throw new ConflictException('Email already exists');
+      }
+      throw error;
+    }
   }
 }

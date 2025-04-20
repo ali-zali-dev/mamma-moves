@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { Box, Typography, CircularProgress, Button, Alert } from '@mui/material';
 import axios from 'axios';
 import { config } from '../config';
+import { useAuth } from '../contexts/AuthContext';
+import { createAuthInterceptor } from '../services/authService';
 
 interface Video {
   id: string;
@@ -21,6 +23,13 @@ export const VideoPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [videoError, setVideoError] = useState<string | null>(null);
+  const { token } = useAuth();
+
+  useEffect(() => {
+    if (token) {
+      createAuthInterceptor(token);
+    }
+  }, [token]);
 
   useEffect(() => {
     const fetchVideo = async () => {
@@ -30,6 +39,10 @@ export const VideoPage = () => {
         setVideo(response.data);
         setLoading(false);
       } catch (err) {
+        if (axios.isAxiosError(err) && err.response?.status === 403) {
+          navigate('/pricing');
+          return;
+        }
         setError('Failed to fetch video');
         setLoading(false);
         console.error('Error fetching video:', err);
@@ -37,7 +50,7 @@ export const VideoPage = () => {
     };
 
     fetchVideo();
-  }, [id]);
+  }, [id, navigate]);
 
   // Ensure the video URL is properly formatted
   const videoUrl = video?.videoUrl as string

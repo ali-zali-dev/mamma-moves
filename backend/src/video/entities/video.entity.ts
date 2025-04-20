@@ -1,7 +1,7 @@
 import { Entity, Column } from 'typeorm';
 import { BaseEntity } from '../../common/entities/base.entity';
 import { VideoCategory } from '../enums/video-category.enum';
-import { VideoAccessLevel } from 'src/video/enums/video-access-level.enum';
+import { VideoAccessLevel } from '../enums/video-access-level.enum';
 
 @Entity()
 export class Video extends BaseEntity {

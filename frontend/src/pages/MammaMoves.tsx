@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Box, Typography, Card, CardContent, CardMedia, CircularProgress, Chip } from '@mui/material';
 import axios from 'axios';
 import { config } from '../config';
+import { useAuth } from '../contexts/AuthContext';
+import { createAuthInterceptor } from '../services/authService';
 
 interface Video {
   id: string;
@@ -20,13 +22,16 @@ export const MammaMoves = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const { token } = useAuth();
+
+  useEffect(() => {
+    if (token) {
+      createAuthInterceptor(token);
+    }
+  }, [token]);
 
   const handleVideoClick = (video: Video) => {
-    if (video.accessLevel !== 'FREE') {
-      navigate('/pricing');
-    } else {
       navigate(`/video/${video.id}`);
-    }
   };
 
   useEffect(() => {
@@ -114,11 +119,7 @@ export const MammaMoves = () => {
                       image={video.thumbnailUrl}
                       alt={video.title}
                       sx={{
-                        filter: video.accessLevel === 'PREMIUM' ? 'blur(4px)' : 'none',
-                        transition: 'filter 0.3s ease-in-out',
-                        '&:hover': {
-                          filter: video.accessLevel === 'PREMIUM' ? 'blur(2px)' : 'none'
-                        }
+                        transition: 'filter 0.3s ease-in-out'
                       }}
                     />
                     {video.accessLevel === 'PREMIUM' && (
@@ -190,12 +191,31 @@ export const MammaMoves = () => {
                   sx={{ cursor: 'pointer' }}
                   onClick={() => navigate(`/video/${video.id}`)}
                 >
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={video.thumbnailUrl}
-                    alt={video.title}
-                  />
+                  <Box sx={{ position: 'relative' }}>
+                    <CardMedia
+                      component="img"
+                      height="140"
+                      image={video.thumbnailUrl}
+                      alt={video.title}
+                      sx={{
+                        transition: 'filter 0.3s ease-in-out'
+                      }}
+                    />
+                    {video.accessLevel === 'PREMIUM' && (
+                      <Chip
+                        label="PREMIUM"
+                        color="primary"
+                        sx={{
+                          position: 'absolute',
+                          top: 8,
+                          right: 8,
+                          backgroundColor: 'rgba(25, 118, 210, 0.9)',
+                          color: 'white',
+                          fontWeight: 'bold'
+                        }}
+                      />
+                    )}
+                  </Box>
                   <CardContent>
                     <Typography gutterBottom variant="h6" component="div">
                       {video.title}
@@ -250,12 +270,31 @@ export const MammaMoves = () => {
                   sx={{ cursor: 'pointer' }}
                   onClick={() => navigate(`/video/${video.id}`)}
                 >
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={video.thumbnailUrl}
-                    alt={video.title}
-                  />
+                  <Box sx={{ position: 'relative' }}>
+                    <CardMedia
+                      component="img"
+                      height="140"
+                      image={video.thumbnailUrl}
+                      alt={video.title}
+                      sx={{
+                        transition: 'filter 0.3s ease-in-out'
+                      }}
+                    />
+                    {video.accessLevel === 'PREMIUM' && (
+                      <Chip
+                        label="PREMIUM"
+                        color="primary"
+                        sx={{
+                          position: 'absolute',
+                          top: 8,
+                          right: 8,
+                          backgroundColor: 'rgba(25, 118, 210, 0.9)',
+                          color: 'white',
+                          fontWeight: 'bold'
+                        }}
+                      />
+                    )}
+                  </Box>
                   <CardContent>
                     <Typography gutterBottom variant="h6" component="div">
                       {video.title}
@@ -310,12 +349,31 @@ export const MammaMoves = () => {
                   sx={{ cursor: 'pointer' }}
                   onClick={() => navigate(`/video/${video.id}`)}
                 >
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={video.thumbnailUrl}
-                    alt={video.title}
-                  />
+                  <Box sx={{ position: 'relative' }}>
+                    <CardMedia
+                      component="img"
+                      height="140"
+                      image={video.thumbnailUrl}
+                      alt={video.title}
+                      sx={{
+                        transition: 'filter 0.3s ease-in-out'
+                      }}
+                    />
+                    {video.accessLevel === 'PREMIUM' && (
+                      <Chip
+                        label="PREMIUM"
+                        color="primary"
+                        sx={{
+                          position: 'absolute',
+                          top: 8,
+                          right: 8,
+                          backgroundColor: 'rgba(25, 118, 210, 0.9)',
+                          color: 'white',
+                          fontWeight: 'bold'
+                        }}
+                      />
+                    )}
+                  </Box>
                   <CardContent>
                     <Typography gutterBottom variant="h6" component="div">
                       {video.title}

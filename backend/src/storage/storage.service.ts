@@ -9,6 +9,7 @@ import {
 } from '@aws-sdk/client-s3';
 import { ConfigService } from '@nestjs/config';
 import { AwsCredentialIdentity } from '@aws-sdk/types';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
 @Injectable()
 export class StorageService {
@@ -68,7 +69,7 @@ export class StorageService {
       Key: key,
       Body: file,
       ContentType: contentType,
-      ACL: 'public-read',
+      ACL: 'private',
     });
 
     await this.s3Client.send(command);
@@ -150,6 +151,23 @@ export class StorageService {
         throw new Error(`Failed to set bucket policy: ${error.message}`);
       }
       throw new Error('Failed to set bucket policy: Unknown error occurred');
+    }
+  }
+
+  async getSignedUrl(key: string, expiresIn: number = 3600): Promise<string> {
+    try {
+      const command = new GetObjectCommand({
+        Bucket: this.bucketName,
+        Key: key,
+      });
+
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
+      return await getSignedUrl(this.s3Client, command, { expiresIn });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        throw new Error(`Failed to generate signed URL: ${error.message}`);
+      }
+      throw new Error('Failed to generate signed URL: Unknown error occurred');
     }
   }
 }

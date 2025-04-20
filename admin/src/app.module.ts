@@ -10,6 +10,9 @@ import options from './admin/options.js';
 import AdminJS from 'adminjs';
 import { Resource, Database } from '@adminjs/typeorm';
 import { Video } from './resources/video.js';
+import { User } from './resources/user.js';
+import { Plan } from './resources/plan.js';
+import { UserPlan } from './resources/userPlan.js';
 
 AdminJS.registerAdapter({
   Resource,
@@ -28,7 +31,7 @@ AdminJS.registerAdapter({
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      entities: [Video],
+      entities: [Video, User, Plan, UserPlan],
       synchronize: true, // Set to false in production
       autoLoadEntities: true,
     }),

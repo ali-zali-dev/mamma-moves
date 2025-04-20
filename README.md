@@ -20,7 +20,8 @@ Currently, the project has the following setup completed:
 - Video module implementation
 - Storage module implementation
 - Seed data setup
-- Access level management
+- Implement plan module
+- Implement user authentication
 - Admin functionality
 ![Mamma Moves Screenshot](backend/static/r1.png)
 ![Mamma Moves Screenshot](backend/static/r2.png)
@@ -28,11 +29,9 @@ Currently, the project has the following setup completed:
 
 
 ## TODO List
-- [ ] Implement user authentication and authorization
-- [ ] Add CI/CD pipeline
 - [ ] Implement error handling
+- [ ] Implement streaming
 - [ ] Add logging system
-- [ ] Set up monitoring and analytics
 - [ ] Add performance optimizations
 
 ## Prerequisites

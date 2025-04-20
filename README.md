@@ -7,7 +7,7 @@ A web application designed to help users track and manage their fitness journey 
 - [Cursor doc](https://www.notion.so/Mamma-Moves-1dbdc030bde98079aaf9f6d482d59d60)
 
 ## Links
-- [Video Explanation](https://drive.google.com/file/d/1wY5AZjgZ1e2J8JKA5CnGnBz-ylxdcwXc/view?usp=sharing)
+- [Video Explanation](https://drive.google.com/file/d/19yoZ6Iv-sbxpqCCAoMjao3zOR22udXb9/view?usp=sharing)
 
 ## Project Status
 Currently, the project has the following setup completed:
@@ -15,23 +15,22 @@ Currently, the project has the following setup completed:
 - Docker configuration for development environment
 - Database (PostgreSQL) configuration
 - MinIO object storage setup
-- Development environment configuration
-- Basic npm scripts for development and production
 - Video module implementation
 - Storage module implementation
 - Seed data setup
 - Implement plan module
 - Implement user authentication
+- Sign videos
 - Admin functionality
 ![Mamma Moves Screenshot](backend/static/r1.png)
-![Mamma Moves Screenshot](backend/static/r2.png)
 
 
 
 ## TODO List
-- [ ] Implement error handling
+- [ ] Track exercise planing
+- [ ] Reminder
+- [ ] Implement logging and error handling
 - [ ] Implement streaming
-- [ ] Add logging system
 - [ ] Add performance optimizations
 
 ## Prerequisites

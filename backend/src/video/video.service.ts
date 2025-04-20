@@ -26,8 +26,7 @@ export class VideoService {
 
     return this.videoRepository.find({ where });
   }
-
-  async findOne(id: number): Promise<Video> {
+  async findOne(id: string): Promise<Video> {
     return this.videoRepository.findOneOrFail({ where: { id } });
   }
 }

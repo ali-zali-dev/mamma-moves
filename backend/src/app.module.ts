@@ -5,6 +5,7 @@ import { VideoModule } from './video/video.module';
 import { StorageModule } from './storage/storage.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { PlanModule } from './plan/plan.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { AuthModule } from './auth/auth.module';
     StorageModule,
     UserModule,
     AuthModule,
+    PlanModule,
   ],
   controllers: [],
   providers: [],

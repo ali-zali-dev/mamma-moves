@@ -37,7 +37,7 @@ export class VideoController {
     status: 404,
     description: 'Video not found',
   })
-  async findOne(@Param('id') id: number): Promise<Video> {
+  async findOne(@Param('id') id: string): Promise<Video> {
     return this.videoService.findOne(id);
   }
 }

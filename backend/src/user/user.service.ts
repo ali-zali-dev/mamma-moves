@@ -18,7 +18,7 @@ export class UserService {
   async findAll(): Promise<User[]> {
     return this.userRepository.find();
   }
-  async findOne(id: number): Promise<User> {
+  async findOne(id: string): Promise<User> {
     const user = await this.userRepository.findOne({ where: { id } });
     if (!user) {
       throw new Error('User not found');
@@ -34,7 +34,7 @@ export class UserService {
     return user;
   }
 
-  async update(id: number, user: Partial<User>): Promise<User> {
+  async update(id: string, user: Partial<User>): Promise<User> {
     await this.userRepository.update(id, user);
     return this.findOne(id);
   }

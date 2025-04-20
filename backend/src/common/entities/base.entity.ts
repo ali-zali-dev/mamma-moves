@@ -12,18 +12,23 @@ import {
 export abstract class BaseEntity {
   @Expose()
   @ApiProperty()
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Expose()
   @ApiProperty()
-  @CreateDateColumn({ type: 'timestamptz' })
-  createdAt?: Date;
+  @Column({ default: true })
+  isActive: boolean;
 
   @Expose()
   @ApiProperty()
-  @UpdateDateColumn({ type: 'timestamptz', nullable: true })
-  updatedAt?: Date;
+  @CreateDateColumn({ type: 'timestamp' })
+  createdAt: Date;
+
+  @Expose()
+  @ApiProperty()
+  @UpdateDateColumn({ type: 'timestamp' })
+  updatedAt: Date;
 
   @ApiProperty()
   @Column({ select: false })
